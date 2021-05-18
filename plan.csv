@@ -1,0 +1,21 @@
+﻿Kod kursu;Grupa kursu;Prowadzący;Nazwa kursu;Godzina rozpoczęcia;Godzina zakończenia;Dzień;Tydzień;ECTS
+ZMZ001597W;Z04-91a;Anna Sałamacha, Joanna Zimmer;Marketing i innowacje;15:15;16:55;1;C;2
+ZMZ001597C;Z04-89a;Konrad Krajewski;Marketing i innowacje;17:05;18:45;1;N;2
+ZMZ001597S;Z04-90b;Joanna Zimmer;Marketing i innowacje;17:05;18:45;1;P;1
+ZMZ001597S;Z04-90a;Anna Sałamacha;Marketing i innowacje;18:55;20:35;1;P;1
+ZMZ001597C;Z04-89b;Konrad Krajewski;Marketing i innowacje;18:55;20:35;1;N;2
+INZ004321L;Z04-38a;Donat Orski;Sztuczna Inteligencja;07:30;09:00;2;C;2
+INZ004321L;Z04-38b;Donat Orski;Sztuczna Inteligencja;09:15;11:00;2;C;2
+INZ004321L;Z04-38c;Donat Orski;Sztuczna Inteligencja;13:15;15:00;2;C;2
+INZ004321W;Z04-39a;Donat Orski;Sztuczna Inteligencja;11:15;13:00;2;C;2
+INZ003425W;Z04-33a;Grzegorz Filcek;Zaaw. Metody wspomagania decyz.;15:15;16:55;2;C;2
+INZ003425P;Z04-32a;Grzegorz Filcek;Zaaw. Metody wspomagania decyz.;17:05;18:45;2;C;3
+INZ003438L;Z04-36a;Donat Orski;Zespołowe przedsięwzięcie inż.;07:30;09:00;3;C;2
+INZ003438P;Z04-37a;Donat Orski;Zespołowe przedsięwzięcie inż.;09:15;11:00;3;C;2
+INZ003422L;Z04-30b;Julia Falkowska;Projektowanie systemów inform.;09:15;11:00;4;C;2
+INZ003422L;Z04-30c;Janusz Sobecki;Projektowanie systemów inform.;09:15;11:00;4;C;2
+INZ003422L;Z04-30a;Julia Falkowska;Projektowanie systemów inform.;13:15;15:00;4;C;2
+INZ003422W;Z04-31a;Janusz Sobecki;Projektowanie systemów inform.;11:15;13:00;4;P;1
+INZ003429W;Z04-35a;Maciej Hojda;Systemy czasu rzeczywistego;09:15;11:00;5;C;1
+INZ003429L;Z04-34a;Maciej Hojda;Systemy czasu rzeczywistego;11:15;13:00;5;C;3
+INZ003429L;Z04-34b;Maciej Hojda;Systemy czasu rzeczywistego;13:15;15:00;5;C;3
