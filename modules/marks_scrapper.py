@@ -5,7 +5,21 @@ import json
 
 
 def credentials_verification(CREDENTIALS):
-    return True
+    data = {
+        "username": CREDENTIALS["username"],
+        "password": CREDENTIALS["password"],
+        "redirect": ",",
+        "login": "Zaloguj",
+    }
+    with rq.Session() as s:
+        p = s.post("https://polwro.pl/login.php?redirect=", data=data)
+        p.encoding = "ISO-8859-2"
+        if "Błędne hasło dla użytkownika" in p.text:
+            return False
+        elif "Konto zostało zablokowane z powodu wielokrotnej próby logowania" in p.text:
+            print("Konto zostało zablokowane z powodu wielokrotnej próby logowania, spróbuj ponownie później")
+        else:
+            return True
 
 
 def read_user_credentials():
@@ -40,8 +54,9 @@ def read_user_credentials():
         }
         f1 = Fernet(bytes(KEYS["1"], "utf-8"))
         f2 = Fernet(bytes(KEYS["2"], "utf-8"))
-        CREDENTIALS["username"] = f1.encrypt(bytes(CREDENTIALS["username"], "utf-8")).decode("utf-8")
-        CREDENTIALS["password"] = f2.encrypt(bytes(CREDENTIALS["password"], "utf-8")).decode("utf-8")
+        CREDENTIALS_ENCRYPTED = {}
+        CREDENTIALS_ENCRYPTED["username"] = f1.encrypt(bytes(CREDENTIALS["username"], "utf-8")).decode("utf-8")
+        CREDENTIALS_ENCRYPTED["password"] = f2.encrypt(bytes(CREDENTIALS["password"], "utf-8")).decode("utf-8")
         with open("../data/user_credentials.json", "w") as file:
             json.dump(CREDENTIALS, file)
         with open("../data/user_credentials_tokens.json", "w") as file:
@@ -54,5 +69,4 @@ def connection(url=""):
 
 
 if __name__ == "__main__":
-    print(read_user_credentials())
-    print(read_user_credentials())
+    pass
