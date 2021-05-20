@@ -214,3 +214,6 @@ cython_debug/
 # Hasła
 data/user_credentials.json
 data/user_credentials_tokens.json
+
+# Oceny wykładowców
+data/lecturers_marks.json
