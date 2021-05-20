@@ -93,7 +93,7 @@ def scrape():
                 for lecturer in lecturers:
                     lecturer = str(lecturer).split("\n")[0]
                     mark = re.findall("[0-9],*[0-9]*[0-9]*", lecturer)[0].replace(",", ".")
-                    name = re.findall("title *= *\"(?:.*)\" *>(.*?)< */ *a *>", lecturer)[0]
+                    name = re.findall("title *= *\".*\" *>(.*?)< */ *a *>", lecturer)[0]
                     name = name.strip().replace(",", "").replace(".", "").split()
                     lecturers_marks.append({"name": name, "mark": mark})
                 start += 50
@@ -102,5 +102,6 @@ def scrape():
         json.dump(lecturers_marks, file)
     return lecturers_marks
 
+
 if __name__ == "__main__":
-    scrape()
+    print(len(scrape()))
