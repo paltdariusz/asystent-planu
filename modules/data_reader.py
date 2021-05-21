@@ -5,6 +5,10 @@ import os.path
 def clean_data(df):
     for i in df.index:
         df.at[i, "Prowadzący"] = list(map(lambda x: x.split(" "), df.loc[i]["Prowadzący"].split(", ")))
+        if len(df.at[i, "Godzina rozpoczęcia"]) < 5:
+            df.at[i, "Godzina rozpoczęcia"] = '0' + df.at[i, "Godzina rozpoczęcia"]
+        if len(df.at[i, "Godzina zakończenia"]) < 5:
+            df.at[i, "Godzina zakończenia"] = '0' + df.at[i, "Godzina zakończenia"]
     return df
 
 
