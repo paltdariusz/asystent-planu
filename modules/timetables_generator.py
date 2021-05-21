@@ -44,7 +44,6 @@ def generate(plan_name):
     kursy = read_csv(plan_name)
     timetables = []
     pd.set_option("display.max_rows", None, "display.max_columns", None)
-    print(kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu").count().prod())
     grupy = \
         kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(name='Grupy')[
             'Grupy'].tolist()
