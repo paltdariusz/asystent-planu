@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import itertools
 
-from data_reader import read_csv
-
 GODZINY = {
     'rozpoczęcia': {
         '07:30': 0,
@@ -40,8 +38,7 @@ GODZINY = {
 }
 
 
-def generate(plan_name):
-    kursy = read_csv(plan_name)
+def generate(kursy):
     timetables = []
     pd.set_option("display.max_rows", None, "display.max_columns", None)
     grupy = \
