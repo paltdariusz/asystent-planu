@@ -103,5 +103,10 @@ def scrape():
     return lecturers_marks
 
 
+def join_marks(lecturers_marks, kursy):
+    # TODO połączyć oceny do df
+    pass
+
+
 if __name__ == "__main__":
     print(len(scrape()))
