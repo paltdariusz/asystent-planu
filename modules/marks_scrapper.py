@@ -104,7 +104,7 @@ def scrape():
 
 
 def join_marks(lecturers_marks, kursy):
-    kursy['Marks'] = 0
+    kursy['Marks'] = 0.0
     for i in kursy.index:
         avg = 0
         ile = 0

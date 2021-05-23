@@ -20,15 +20,12 @@ def gaps_counter(PLAN):
 def avg_lecturers_marks(kursy, grupy):
     ile = 0
     z = 0
-    print('TEST')
     for grupa in grupy:
         ocena = kursy[kursy['Grupa kursu'] == grupa]['Marks']
-        print(ocena.values[0])
         if ocena.values[0] != 0:
             ile += 1
             z -= float(ocena.values[0])
     z /= ile
-    print('--------------')
     return z
 
 
