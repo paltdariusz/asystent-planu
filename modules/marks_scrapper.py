@@ -104,8 +104,20 @@ def scrape():
 
 
 def join_marks(lecturers_marks, kursy):
-    # TODO połączyć oceny do df
-    pass
+    kursy['Marks'] = 0
+    for i in kursy.index:
+        avg = 0
+        ile = 0
+        row = kursy['Prowadzący'][i]
+        for j in row:
+            for lect in lecturers_marks:
+                if (j[1] in lect['name']) and (j[0] in lect['name']):
+                    avg += float(lect['mark'])
+                    ile += 1
+        if ile != 0:
+            avg /= ile
+        kursy.at[i, 'Marks'] = avg
+    return kursy
 
 
 if __name__ == "__main__":

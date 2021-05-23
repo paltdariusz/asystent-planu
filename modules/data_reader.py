@@ -1,5 +1,6 @@
 import pandas as pd
 import os.path
+import json
 
 
 def clean_data(df):
@@ -13,7 +14,7 @@ def clean_data(df):
 
 
 def read_csv(name):
-    path = "../data/" + name + ".csv"
+    path = "data/" + name + ".csv"
     if os.path.isfile(path):
         kursy = pd.read_csv(path, sep=";")
         kursy = clean_data(kursy)
@@ -23,4 +24,25 @@ def read_csv(name):
 
 
 if __name__ == "__main__":
-    read_csv("plan")
+    from criteria_computation import avg_lecturers_marks
+
+    x = read_csv("plan")
+    with open(
+            '/Users/dariuszpalt/OneDrive - Politechnika Wroclawska/STUDIA/studia sem6/ZAAW. METODY WSPOMAGANIA DECYZ/PROJEKT/asystent_planu/data/lecturers_marks.json') as file:
+        marks = json.load(file)
+    x['Marks'] = None
+    print(x['Prowadzący'])
+    for i in x.index:
+        # print(i)
+        avg = 0
+        ile = 0
+        d = x['Prowadzący'][i]
+        for j in d:
+            for lect in marks:
+                if (j[1] in lect['name']) and (j[0] in lect['name']):
+                    avg += float(lect['mark'])
+                    ile += 1
+        if ile != 0:
+            avg /= ile
+            x.at[i, 'Marks'] = avg
+    print(avg_lecturers_marks(x))

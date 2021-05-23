@@ -1,10 +1,17 @@
 import numpy as np
 
 
+def normalize_ahp(ahp):
+    ahp /= np.sum(ahp, axis=0)
+    results = np.average(ahp, axis=1)
+    return results
+
+
 def create_ahp(debug=False):
     ahp = np.eye(6, 6)
     if debug:
         odpowiedz = ['1/9', '1/9', '1/9', '1', '1', '1/3', '1/5', '1/7', '1/7', '5', '7', '7', '5', '3', '5']
+        # odpowiedz = ['1/9', '1/9', '1', '1/7', '1', '3', '7', '1', '9', '7', '1/3', '7', '1/7', '1/3', '5']
     pytania = [
         '1.	Jak ważna jest dla Ciebie liczba okienek w porównaniu do liczby dni wolnych?',
         '2.	Jak ważna jest dla Ciebie liczba okienek w porównaniu do liczby zajęć rozpoczynających się o 7:30?',
@@ -36,10 +43,9 @@ def create_ahp(debug=False):
             else:
                 ahp[i][j] = float(answer[0])
                 ahp[j][i] = 1 / float(answer[0])
-    ahp /= np.sum(ahp, axis=0)
-    results = np.average(ahp, axis=1)
-    return results
+    return ahp
 
 
 if __name__ == '__main__':
-    create_ahp(True)
+    print(create_ahp(True))
+    print(create_ahp(True).sum())
