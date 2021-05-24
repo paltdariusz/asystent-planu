@@ -27,10 +27,10 @@ def credentials_verification(CREDENTIALS):
 
 
 def read_user_credentials():
-    if os.path.isfile("../data/user_credentials.json") and os.path.isfile("../data/user_credentials_tokens.json"):
-        with open("../data/user_credentials.json", "r") as file:
+    if os.path.isfile("data/user_credentials.json") and os.path.isfile("data/user_credentials_tokens.json"):
+        with open("data/user_credentials.json", "r") as file:
             CREDENTIALS = json.load(file)
-        with open("../data/user_credentials_tokens.json", "r") as file:
+        with open("data/user_credentials_tokens.json", "r") as file:
             KEYS = json.load(file)
         f1 = Fernet(bytes(KEYS["1"], "utf-8"))
         f2 = Fernet(bytes(KEYS["2"], "utf-8"))
@@ -61,9 +61,9 @@ def read_user_credentials():
         CREDENTIALS_ENCRYPTED = {}
         CREDENTIALS_ENCRYPTED["username"] = f1.encrypt(bytes(CREDENTIALS["username"], "utf-8")).decode("utf-8")
         CREDENTIALS_ENCRYPTED["password"] = f2.encrypt(bytes(CREDENTIALS["password"], "utf-8")).decode("utf-8")
-        with open("../data/user_credentials.json", "w") as file:
+        with open("data/user_credentials.json", "w") as file:
             json.dump(CREDENTIALS_ENCRYPTED, file)
-        with open("../data/user_credentials_tokens.json", "w") as file:
+        with open("data/user_credentials_tokens.json", "w") as file:
             json.dump(KEYS, file)
     return CREDENTIALS
 
@@ -98,7 +98,7 @@ def scrape():
                     lecturers_marks.append({"name": name, "mark": mark})
                 start += 50
                 time.sleep(0.5)
-    with open("../data/lecturers_marks.json", "w") as file:
+    with open("data/lecturers_marks.json", "w") as file:
         json.dump(lecturers_marks, file)
     return lecturers_marks
 
