@@ -12,6 +12,7 @@ def create_ahp(debug=False):
     if debug:
         odpowiedz = ['1/9', '1/9', '1/9', '1', '1', '1/3', '1/5', '1/7', '1/7', '5', '7', '7', '5', '3', '5']
         # odpowiedz = ['1/9', '1/9', '1', '1/7', '1', '3', '7', '1', '9', '7', '1/3', '7', '1/7', '1/3', '5']
+        odpowiedz = ['1/3', '7', '1/3', '1/7', '1/5', '5', '5', '1/5', '3', '1/3', '1/9', '1/5', '1/7', '1/5', '5']
     pytania = [
         '1.	Jak ważna jest dla Ciebie liczba okienek w porównaniu do liczby dni wolnych?',
         '2.	Jak ważna jest dla Ciebie liczba okienek w porównaniu do liczby zajęć rozpoczynających się o 7:30?',
