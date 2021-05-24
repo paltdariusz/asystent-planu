@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 import itertools
 
@@ -40,7 +39,6 @@ GODZINY = {
 
 def generate(kursy):
     timetables = []
-    pd.set_option("display.max_rows", None, "display.max_columns", None)
     grupy = \
         kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(name='Grupy')[
             'Grupy'].tolist()
