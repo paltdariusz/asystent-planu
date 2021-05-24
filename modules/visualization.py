@@ -25,7 +25,7 @@ def plot(kursy, tab, zapis, title, length):
                                  ticktext=['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek']), title=title)
     fig.update_traces(textposition='inside', textfont_size=14, textfont_color='black')
     # fig.show()
-    fig.write_image(f'wyniki/{zapis + str(length)}.png', width=1920, height=1080)
+    fig.write_image(f'wyniki/{zapis + str(length)}.svg', width=1920, height=1080)
 
 
 def visualize(kursy, length):
