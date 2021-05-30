@@ -1,5 +1,6 @@
 import numpy as np
 import itertools
+import sys
 
 GODZINY = {
     'rozpoczęcia': {
@@ -43,7 +44,14 @@ def generate(kursy):
         kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(name='Grupy')[
             'Grupy'].tolist()
     PLANS = []
+    num = 0
+    all_solutions = kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu").count().prod().values[0]
     for element in itertools.product(*grupy):
+        perc = int(float((num + 1) / all_solutions) * 100)
+        sys.stdout.write('\r')
+        sys.stdout.write("[%-100s] %d%%" % ('=' * perc, perc))
+        sys.stdout.flush()
+        num += 1
         # sprawdzenie czy każdy kursy jest unikalny
         if len(set(element)) != len(element):
             continue

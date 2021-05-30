@@ -9,6 +9,7 @@ def normalize_ahp(ahp):
 
 def create_ahp(debug=False):
     ahp = np.eye(6, 6)
+    # TODO dodaj presety z odpowiedziami przykładowych studentów
     if debug:
         odpowiedz = ['1/9', '1/9', '1/9', '1', '1', '1/3', '1/5', '1/7', '1/7', '5', '7', '7', '5', '3', '5']
         # odpowiedz = ['1/9', '1/9', '1', '1/7', '1', '3', '7', '1', '9', '7', '1/3', '7', '1/7', '1/3', '5']

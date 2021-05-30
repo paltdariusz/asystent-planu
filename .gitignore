@@ -217,3 +217,9 @@ data/user_credentials_tokens.json
 
 # Oceny wykładowców
 data/lecturers_marks.json
+
+*.svg
+*.pdf
+*.json
+*.csv
+*.xlsx
