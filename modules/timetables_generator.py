@@ -38,7 +38,7 @@ GODZINY = {
 }
 
 
-def generate(kursy):
+def generate(kursy, debug=False):
     timetables = []
     grupy = \
         kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(name='Grupy')[
@@ -52,43 +52,45 @@ def generate(kursy):
         sys.stdout.write("[%-100s] %d%%" % ('=' * perc, perc))
         sys.stdout.flush()
         num += 1
-        # sprawdzenie czy każdy kursy jest unikalny
-        if len(set(element)) != len(element):
-            continue
-        kp = kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(
-            name='Grupy').copy()
-        # sprawdzenie czy zapisany na każdy kurs
-        if len(element) != kp.shape[0]:
-            continue
-        for gr in element:
-            for i in range(kp.shape[0]):
-                if gr in kp.loc[i, 'Grupy']:
-                    kp.drop(index=i, inplace=True)
-                    kp.reset_index(drop=True, inplace=True)
-                    break
-        if kp.shape[0] != 0:
-            continue
-        # sprawdzenie czy kursy nie nakładają się na siebie
+        if not debug:
+            # sprawdzenie czy każdy kursy jest unikalny
+            if len(set(element)) != len(element):
+                continue
+            kp = kursy[["Kod kursu", 'Grupa kursu']].groupby("Kod kursu")['Grupa kursu'].apply(list).reset_index(
+                name='Grupy').copy()
+            # sprawdzenie czy zapisany na każdy kurs
+            if len(element) != kp.shape[0]:
+                continue
+            for gr in element:
+                for i in range(kp.shape[0]):
+                    if gr in kp.loc[i, 'Grupy']:
+                        kp.drop(index=i, inplace=True)
+                        kp.reset_index(drop=True, inplace=True)
+                        break
+            if kp.shape[0] != 0:
+                continue
+            # sprawdzenie czy kursy nie nakładają się na siebie
         PLAN = np.zeros((10, 14))
-        for gr in element:
-            dane = kursy[kursy['Grupa kursu'] == gr][['Godzina rozpoczęcia', 'Godzina zakończenia', 'Dzień', 'Tydzień']]
-            g_roz = GODZINY['rozpoczęcia'][dane['Godzina rozpoczęcia'].values[0]]
-            g_zak = GODZINY['zakończenia'][dane['Godzina zakończenia'].values[0]]
-            if dane['Tydzień'].values[0] == 'C':
-                for i in range(g_roz, g_zak + 1):
-                    PLAN[dane['Dzień'].values[0] - 1, i] += 1
-                    PLAN[dane['Dzień'].values[0] - 1 + 5, i] += 1
-            elif dane['Tydzień'].values[0] == 'N':
-                for i in range(g_roz, g_zak + 1):
-                    PLAN[dane['Dzień'].values[0] - 1, i] += 1
-            elif dane['Tydzień'].values[0] == 'P':
-                for i in range(g_roz, g_zak + 1):
-                    PLAN[dane['Dzień'].values[0] - 1 + 5, i] += 1
-        p_n = PLAN[:5] + PLAN[5:]
-        if len(p_n[p_n > 2]) > 0:
-            continue
-        if len(PLAN[PLAN > 1]) > 0:
-            continue
+        if not debug:
+            for gr in element:
+                dane = kursy[kursy['Grupa kursu'] == gr][['Godzina rozpoczęcia', 'Godzina zakończenia', 'Dzień', 'Tydzień']]
+                g_roz = GODZINY['rozpoczęcia'][dane['Godzina rozpoczęcia'].values[0]]
+                g_zak = GODZINY['zakończenia'][dane['Godzina zakończenia'].values[0]]
+                if dane['Tydzień'].values[0] == 'C':
+                    for i in range(g_roz, g_zak + 1):
+                        PLAN[dane['Dzień'].values[0] - 1, i] += 1
+                        PLAN[dane['Dzień'].values[0] - 1 + 5, i] += 1
+                elif dane['Tydzień'].values[0] == 'N':
+                    for i in range(g_roz, g_zak + 1):
+                        PLAN[dane['Dzień'].values[0] - 1, i] += 1
+                elif dane['Tydzień'].values[0] == 'P':
+                    for i in range(g_roz, g_zak + 1):
+                        PLAN[dane['Dzień'].values[0] - 1 + 5, i] += 1
+            p_n = PLAN[:5] + PLAN[5:]
+            if len(p_n[p_n > 2]) > 0:
+                continue
+            if len(PLAN[PLAN > 1]) > 0:
+                continue
         timetables.append(element)
         PLANS.append(PLAN)
     return timetables, PLANS
