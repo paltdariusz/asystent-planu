@@ -40,6 +40,8 @@ def evenness_of_classes(PLAN):
     zprim = 1 / working_days_counter(PLAN) * PLAN.sum()
     z = 0
     for i in range(PLAN.shape[0]):
+        if all(PLAN[i, :] == np.zeros_like(PLAN[i, :])):
+            continue
         z += np.abs(zprim - PLAN[i, :].sum())
     return z
 
