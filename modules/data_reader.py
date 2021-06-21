@@ -12,8 +12,7 @@ def clean_data(df):
     return df
 
 
-def read_csv(name):
-    path = "data/" + name + ".csv"
+def read_csv(path):
     if os.path.isfile(path):
         kursy = pd.read_csv(path, sep=";")
         kursy = clean_data(kursy)
